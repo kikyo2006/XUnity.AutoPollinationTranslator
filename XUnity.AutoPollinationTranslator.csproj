@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Reference Include="XUnity.AutoTranslator.Plugin.Core">
+			<HintPath>packages\XUnity.AutoTranslator.Plugin.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="XUnity.AutoTranslator.Plugin.ExtProtocol">
+			<HintPath>packages\XUnity.AutoTranslator.Plugin.ExtProtocol.dll</HintPath>
+		</Reference>
+		<Reference Include="XUnity.Common">
+			<HintPath>packages\XUnity.Common.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18" PrivateAssets="All" />
+	</ItemGroup>
+
+	<Target Name="ILRepack" AfterTargets="Build">
+		<PropertyGroup>
+			<WorkingDirectory>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(TargetFramework)</WorkingDirectory>
+		</PropertyGroup>
+		<Message Text="MERGING: @(InputAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
+		<ILRepack OutputType="$(OutputType)" MainAssembly="$(AssemblyName).dll" OutputAssembly="$(AssemblyName).dll" InputAssemblies="@(InputAssemblies)" InternalizeExcludeAssemblies="@(InternalizeExcludeAssemblies)" WorkingDirectory="$(WorkingDirectory)" />
+	</Target>
+
+</Project>

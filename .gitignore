@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.sln.docstates
+
+# NuGet Packages
+packages/
+# Except for specific packages if needed, but usually they are restored
+!packages/repositories.config
+
+# Project specific
+gemini/
+
+# Misc
+Thumbs.db
+ehthumbs.db
+Desktop.ini
